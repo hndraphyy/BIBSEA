@@ -1,10 +1,13 @@
 @use 'abstracts/fonts';
-// @use 'abstracts/variables' as *;
 
 // base
 @use 'base/reset';
 @use 'base/base';
 @use 'base/typography';
+
+// components
+@use 'components/input.scss';
+@use 'components/button.scss';
 
 // pages
 @use 'pages/login.scss';

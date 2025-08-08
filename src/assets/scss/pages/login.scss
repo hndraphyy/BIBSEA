@@ -14,14 +14,27 @@
   }
 
   .left {
-    .icon {
-      font-size: 3rem;
-      font-weight: 600;
-      color: $color-primary;
-    }
+    background: white;
   }
   .right {
     background: $color-primary;
-    
+    form {
+      min-width: 400px;
+      .form-group {
+        margin-bottom: 1rem;
+        color: white;
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+        }
+      }
+    }
   }
+}
+
+.login-failed {
+  color: red;
+  padding-top: 10px;
+  font-size: 14px;
 }

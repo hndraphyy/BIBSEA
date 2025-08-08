@@ -1,14 +1,19 @@
 <template>
   <div class="wrapper-login">
     <div class="left">
-      <span class="icon">BIBSEA</span>
+      <img src="@/assets/images/icon/iconLogo.svg" alt="..." />
     </div>
+
     <div class="right">
       <form @submit.prevent="handleLogin">
+        <!-- Email -->
         <div class="form-group">
           <label for="email">Email</label>
-          <input id="email" v-model="email" type="email" placeholder="Enter your email" required />
+          <input id="email" v-model="email" type="email" placeholder="Enter your email" />
+          <span class="login-failed" v-if="errors.email">{{ errors.email }}</span>
         </div>
+
+        <!-- Password -->
         <div class="form-group">
           <label for="password">Password</label>
           <input
@@ -16,9 +21,10 @@
             v-model="password"
             type="password"
             placeholder="Enter your password"
-            required
           />
+          <span class="login-failed" v-if="errors.password">{{ errors.password }}</span>
         </div>
+
         <button type="submit">Login</button>
       </form>
     </div>
@@ -26,12 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useLogin } from '../composables/useLogin'
 
-const email = ref('')
-const password = ref('')
-
-const handleLogin = () => {
-  console.log('Login dengan', email.value, password.value)
-}
+const { email, password, errors, handleLogin } = useLogin()
 </script>
