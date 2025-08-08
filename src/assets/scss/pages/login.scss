@@ -1,0 +1,27 @@
+@use '../abstracts/variables' as *;
+
+.wrapper-login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+
+  .left,
+  .right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left {
+    .icon {
+      font-size: 3rem;
+      font-weight: 600;
+      color: $color-primary;
+    }
+  }
+  .right {
+    background: $color-primary;
+    
+  }
+}
