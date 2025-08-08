@@ -9,20 +9,13 @@
         <!-- Email -->
         <div class="form-group">
           <label for="email">Email</label>
-          <input id="email" v-model="email" type="email" placeholder="Enter your email" />
-          <span class="login-failed" v-if="errors.email">{{ errors.email }}</span>
+          <input id="email" type="email" placeholder="Enter your email" />
         </div>
 
         <!-- Password -->
         <div class="form-group">
           <label for="password">Password</label>
-          <input
-            id="password"
-            v-model="password"
-            type="password"
-            placeholder="Enter your password"
-          />
-          <span class="login-failed" v-if="errors.password">{{ errors.password }}</span>
+          <input id="password" type="password" placeholder="Enter your password" />
         </div>
 
         <button type="submit">Login</button>
@@ -32,7 +25,11 @@
 </template>
 
 <script setup lang="ts">
-import { useLogin } from '../composables/useLogin'
+import { useRouter } from 'vue-router'
 
-const { email, password, errors, handleLogin } = useLogin()
+const router = useRouter()
+
+const handleLogin = () => {
+  router.push('/superadmin/dashboard')
+}
 </script>
