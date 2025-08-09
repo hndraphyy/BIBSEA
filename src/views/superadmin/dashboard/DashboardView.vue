@@ -1,6 +1,17 @@
 <template>
   <div>
     <h1>Admin Dashboard</h1>
-    <router-link to="/login">Logout</router-link>
+    <button @click="handleLogout">Logout</button>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const handleLogout = () => {
+  localStorage.removeItem('token') // hapus token
+  router.push('/login') // pindah ke login
+}
+</script>

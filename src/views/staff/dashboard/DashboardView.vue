@@ -1,13 +1,17 @@
 <template>
   <div>
     <h1>Staff Dashboard</h1>
+    <button @click="handleLogout">Logout</button>
   </div>
 </template>
 
 <script setup lang="ts">
-// sementara kosong aja kalau belum ada logic
-</script>
+import { useRouter } from 'vue-router'
 
-<style scoped>
-/* style khusus halaman ini */
-</style>
+const router = useRouter()
+
+const handleLogout = () => {
+  localStorage.removeItem('token') // hapus token
+  router.push('/login') // pindah ke login
+}
+</script>

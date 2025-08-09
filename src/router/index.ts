@@ -1,39 +1,48 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import LoginView from '@/views/auth/LoginView.vue'
-import AdminDashboard from '@/views/staff/dashboard/DashboardView.vue'
-import StaffDashboard from '@/views/superadmin/dashboard/DashboardView.vue'
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import superadminRoutes from '@/router/routes/superadmin'
+import staffRoutes from '@/router/routes/staff'
+
+const routes: RouteRecordRaw[] = [
+  {
+    path: '/',
+    redirect: '/login',
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/auth/LoginView.vue'),
+    meta: { title: 'Login' },
+  },
+  ...superadminRoutes,
+  ...staffRoutes,
+]
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      redirect: '/login',
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: LoginView,
-      meta: { title: 'Login' },
-    },
-    {
-      path: '/superadmin/dashboard',
-      name: 'SuperadminDashboard',
-      component: AdminDashboard,
-      meta: { title: 'Dashboard Superadmin' },
-    },
-    {
-      path: '/staff/dashboard',
-      name: 'StaffDashboard',
-      component: StaffDashboard,
-      meta: { title: 'Dashboard Staff' },
-    },
-  ],
+  history: createWebHistory(),
+  routes,
 })
 
 router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+  const role = localStorage.getItem('role')
+
+  // Auth check
+  if (!token && to.path !== '/login') {
+    return next('/login')
+  }
+  if (token && to.path === '/login') {
+    return next(`/${role}/dashboard`)
+  }
+
+  // Role check: Kalau bukan rolenya → lempar ke login
+  if (token && to.meta.role && role !== to.meta.role) {
+    return next('/login')
+  }
+
+  // Title update
   const baseTitle = 'BIBSEA'
   document.title = to.meta.title ? `${to.meta.title} - ${baseTitle}` : baseTitle
+
   next()
 })
 
