@@ -11,6 +11,8 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const handleLogout = () => {
+  
+
   localStorage.removeItem('token') // hapus token
   router.push('/login') // pindah ke login
 }

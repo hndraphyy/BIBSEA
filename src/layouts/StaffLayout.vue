@@ -9,8 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import SidebarComp from '@/components/SidebarComp.vue'
-import HeaderComp from '@/components/HeaderComp.vue'
+import HeaderComp from '@/components/header/HeaderComp.vue'
 
 const menu = [
   { name: 'Dashboard', path: '/staff/dashboard' },

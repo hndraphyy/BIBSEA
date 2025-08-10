@@ -13,14 +13,24 @@
         </div>
 
         <!-- Password -->
-        <div class="form-group">
+        <div class="form-group password-wrapper">
           <label for="password">Password</label>
-          <input
-            v-model="password"
-            id="password"
-            type="password"
-            placeholder="Enter your password"
-          />
+          <div class="input-icon">
+            <input
+              v-model="password"
+              :type="showPassword ? 'text' : 'password'"
+              id="password"
+              placeholder="Enter your password"
+            />
+            <button type="button" class="eye-btn" @click="togglePassword">
+              <img
+                v-if="showPassword"
+                src="../../assets/images/icon/icon-eye-off.svg"
+                alt="Hide password"
+              />
+              <img v-else src="../../assets/images/icon/icon-eye.svg" alt="Show password" />
+            </button>
+          </div>
         </div>
 
         <button type="submit">Login</button>
@@ -37,14 +47,18 @@ const router = useRouter()
 
 const email = ref('')
 const password = ref('')
+const showPassword = ref(false)
+
+const togglePassword = () => {
+  showPassword.value = !showPassword.value
+}
 
 const handleLogin = () => {
-  // Dummy role check
-  if (email.value === '1test@m') {
+  if (email.value === '') {
     localStorage.setItem('token', 'dummy-token')
     localStorage.setItem('role', 'superadmin')
     router.push('/superadmin/dashboard')
-  } else if (email.value === 'test@m') {
+  } else if (email.value === '1@1') {
     localStorage.setItem('token', 'dummy-token')
     localStorage.setItem('role', 'staff')
     router.push('/staff/dashboard')

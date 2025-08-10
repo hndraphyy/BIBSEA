@@ -1,11 +1,20 @@
+@use '../abstracts/variables' as *;
+
 body {
-  background-color: #f7f7f7;
+  background-color: $color-primary;
   scroll-behavior: smooth;
 }
 
 img {
   max-width: 100%;
   display: block;
+}
+
+.layout {
+  display: flex;
+  .content {
+    padding: 40px;
+  }
 }
 
 ul {

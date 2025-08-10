@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <h1>Admin Dashboard</h1>
-    <button @click="handleLogout">Logout</button>
-  </div>
+  <h1>Admin Dashboard</h1>
+  <button @click="handleLogout">Logout</button>
 </template>
 
 <script setup lang="ts">

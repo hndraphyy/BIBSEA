@@ -23,10 +23,25 @@
       .form-group {
         margin-bottom: 1rem;
         color: white;
+        position: relative;
         label {
           display: block;
           margin-bottom: 0.5rem;
           font-weight: 500;
+        }
+        .input-icon {
+          position: relative;
+
+          .eye-btn {
+            position: absolute;
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            right: 7px;
+            background: transparent;
+          }
         }
       }
     }
