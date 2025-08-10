@@ -1,15 +1,17 @@
 import type { RouteRecordRaw } from 'vue-router'
+import StaffLayout from '@/layouts/StaffLayout.vue'
 
 const staffRoutes: RouteRecordRaw[] = [
   {
     path: '/staff',
-    component: () => import('@/views/staff/dashboard/DashboardView.vue'),
+    component: StaffLayout,
+    meta: { role: 'staff' },
     children: [
       {
         path: 'dashboard',
         name: 'StaffDashboard',
-        component: () => import('@/views/superadmin/dashboard/DashboardView.vue'),
-        meta: { title: 'Dashboard' },
+        component: () => import('@/views/staff/dashboard/DashboardView.vue'),
+        meta: { title: 'Dashboard', role: 'staff' },
       },
     ],
   },

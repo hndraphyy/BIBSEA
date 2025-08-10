@@ -6,9 +6,11 @@
 @use 'base/typography';
 
 // components
+@use 'components/header';
+@use 'components/sidebar';
 @use 'components/input.scss';
 @use 'components/button.scss';
-@use 'components/sidebar';
 
 // pages
 @use 'pages/login.scss';
+@use 'pages/dashboard';

@@ -11,4 +11,13 @@ button {
   color: white;
   font-weight: 500;
   border-radius: 4px;
+  &.login-btn {
+    margin-top: 4px;
+  }
+  &.btn-logout {
+    background: rgb(225, 6, 6);
+    position: absolute;
+    bottom: 15px;
+    width: 280px;
+  }
 }

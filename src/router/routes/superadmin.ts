@@ -9,8 +9,20 @@ const superadminRoutes: RouteRecordRaw[] = [
       {
         path: 'dashboard',
         name: 'SuperadminDashboard',
+        meta: { headerText: 'Dashboard' },
         component: () => import('@/views/superadmin/dashboard/DashboardView.vue'),
-        meta: { title: 'Dashboard' },
+      },
+      {
+        path: 'products',
+        name: 'SuperadminProducts',
+        meta: { headerText: 'Products' },
+        component: () => import('@/views/superadmin/products/ProductsView.vue'),
+      },
+      {
+        path: 'transactions',
+        name: 'SuperadminTransactions',
+        meta: { headerText: 'Transactions' },
+        component: () => import('@/views/superadmin/transactions/TransactionsView.vue'),
       },
     ],
   },

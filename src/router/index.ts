@@ -34,7 +34,7 @@ router.beforeEach((to, from, next) => {
     return next(`/${role}/dashboard`)
   }
 
-  // Role check: Kalau bukan rolenya → lempar ke login
+  // Role check
   if (token && to.meta.role && role !== to.meta.role) {
     return next('/login')
   }
