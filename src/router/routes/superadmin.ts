@@ -24,6 +24,18 @@ const superadminRoutes: RouteRecordRaw[] = [
         meta: { headerText: 'Transactions' },
         component: () => import('@/views/superadmin/transactions/TransactionsView.vue'),
       },
+      {
+        path: 'reports',
+        name: 'Superadminreports',
+        meta: { headerText: 'Reports' },
+        component: () => import('@/views/superadmin/reports/ReportsView.vue'),
+      },
+      {
+        path: 'users',
+        name: 'Superadminusers',
+        meta: { headerText: 'Users' },
+        component: () => import('@/views/superadmin/users/UsersView.vue'),
+      },
     ],
   },
 ]

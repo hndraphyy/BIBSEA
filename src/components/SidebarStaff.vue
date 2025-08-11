@@ -33,43 +33,29 @@
 import { ref, computed } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
 
-const userRole = 'superadmin'
+const userRole = 'staff'
 
 const menuItems = [
   {
     name: 'Dashboard',
-    path: '/superadmin/dashboard',
+    path: '/staff/dashboard',
     icon: new URL('@/assets/images/icon/dashboard.svg', import.meta.url).href,
     iconActive: new URL('@/assets/images/icon/dashboardActive.svg', import.meta.url).href,
-    roles: ['superadmin'],
+    roles: ['staff'],
   },
   {
     name: 'Products',
-    path: '/superadmin/products',
+    path: '/staff/products',
     icon: new URL('@/assets/images/icon/products.svg', import.meta.url).href,
     iconActive: new URL('@/assets/images/icon/productsActive.svg', import.meta.url).href,
-    roles: ['superadmin'],
+    roles: ['staff'],
   },
   {
     name: 'Transactions',
-    path: '/superadmin/transactions',
+    path: '/staff/transactions',
     icon: new URL('@/assets/images/icon/transactions.svg', import.meta.url).href,
     iconActive: new URL('@/assets/images/icon/transactionsActive.svg', import.meta.url).href,
-    roles: ['superadmin'],
-  },
-  {
-    name: 'Reports',
-    path: '/superadmin/reports',
-    icon: new URL('@/assets/images/icon/reports.svg', import.meta.url).href,
-    iconActive: new URL('@/assets/images/icon/reportsActive.svg', import.meta.url).href,
-    roles: ['superadmin'],
-  },
-  {
-    name: 'Users',
-    path: '/superadmin/users',
-    icon: new URL('@/assets/images/icon/users.svg', import.meta.url).href,
-    iconActive: new URL('@/assets/images/icon/usersActive.svg', import.meta.url).href,
-    roles: ['superadmin'],
+    roles: ['staff'],
   },
 ]
 

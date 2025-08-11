@@ -10,8 +10,20 @@ const staffRoutes: RouteRecordRaw[] = [
       {
         path: 'dashboard',
         name: 'StaffDashboard',
+        meta: { headerText: 'Dashboard' },
         component: () => import('@/views/staff/dashboard/DashboardView.vue'),
-        meta: { title: 'Dashboard', role: 'staff' },
+      },
+      {
+        path: 'products',
+        name: 'StaffProducts',
+        meta: { headerText: 'Products' },
+        component: () => import('@/views/staff/products/ProductsView.vue'),
+      },
+      {
+        path: 'transactions',
+        name: 'StaffTransactions',
+        meta: { headerText: 'Transactions' },
+        component: () => import('@/views/staff/transactions/TransactionsView.vue'),
       },
     ],
   },
