@@ -1,3 +1,5 @@
+@use '../abstracts/variables' as *;
+
 input {
   width: 100%;
   padding: 0.5rem 0.8rem;
@@ -5,4 +7,7 @@ input {
   border-radius: 4px;
   outline: none;
   font-family: 'Poppins', sans-serif;
+  &.search-filter {
+    border: 0.8px solid gray;
+  }
 }
