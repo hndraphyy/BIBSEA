@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
-import type { User } from '../users.types'
+import type { User } from '../composables/types'
 
 const emit = defineEmits<{
   (e: 'close'): void
@@ -21,25 +21,25 @@ const saveUser = () => {
 </script>
 
 <template>
-  <div class="modal-backdrop">
-    <div class="modal">
-      <h3>Tambah User</h3>
+  <div class="modal">
+    <div class="modal-add">
+      <h3 class="modal-add__title">Add User</h3>
 
-      <label>Username:</label>
-      <input v-model="form.username" type="text" />
+      <label class="modal-add__label">Username:</label>
+      <input v-model="form.username" type="text" class="input-add" placeholder="user123" />
 
-      <label>Email:</label>
-      <input v-model="form.email" type="email" />
+      <label class="modal-add__label">Email:</label>
+      <input v-model="form.email" type="email" class="input-add" placeholder="user@user.com" />
 
-      <label>Status:</label>
-      <select v-model="form.status">
+      <label class="modal-add__label">Status:</label>
+      <select v-model="form.status" class="status-filter add">
         <option value="Active">Active</option>
         <option value="Non Active">Non Active</option>
       </select>
 
-      <div class="modal-actions">
-        <button @click="$emit('close')">Cancel</button>
-        <button @click="saveUser">Done</button>
+      <div class="modal-add__actions">
+        <button class="cancel" @click="$emit('close')">Cancel</button>
+        <button class="done" @click="saveUser">Done</button>
       </div>
     </div>
   </div>

@@ -6,6 +6,8 @@
   overflow: hidden;
   background: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 10;
   thead {
     width: 10% !important;
 
@@ -17,18 +19,23 @@
       text-align: center;
       .header {
         margin-left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         padding-bottom: 0;
         text-align: center;
+        padding-left: 15px;
+        padding-right: 15px;
       }
     }
   }
   tbody {
-    td[data-v-32683533] {
-      padding: 0;
-      text-align: center;
+    tr {
+      &:hover {
+        background-color: green !important;
+      }
+      td[data-v-32683533] {
+        padding: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
     }
   }
 }

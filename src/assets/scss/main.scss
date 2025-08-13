@@ -11,6 +11,8 @@
 @use 'components/input.scss';
 @use 'components/button.scss';
 @use 'components/datatable';
+@use 'components/modal/menu';
+@use 'components/modal/add';
 
 // pages
 @use 'pages/login.scss';
