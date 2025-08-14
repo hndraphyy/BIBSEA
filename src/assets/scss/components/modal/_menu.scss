@@ -1,7 +1,14 @@
-.action-menu {
+.wp-actions {
   position: absolute;
   z-index: 30;
   width: 80px;
   top: 20px;
-  right: 8px;
+  right: -30px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  border: 0.5px solid gray;
 }

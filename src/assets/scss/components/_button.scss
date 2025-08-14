@@ -18,7 +18,7 @@ button {
     background: rgb(225, 6, 6);
     position: fixed;
     bottom: 15px;
-    width: 280px;
+    width: 260px;
     box-shadow: 0px 0px 20px rgb(255, 255, 255);
   }
   &.action-btn {
@@ -26,17 +26,39 @@ button {
     height: 28px;
     margin-top: 8px;
     margin-bottom: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 20px;
+    position: relative;
+    span {
+      position: absolute;
+      top: -6px;
+      left: 8px;
+    }
   }
   &.action-menu {
-    background: white;
-    border: 0.5px solid gray;
+    background: transparent;
+    border-radius: 0;
     color: $color-gray-cus;
+    &.border {
+      border-top: 0.5px solid gray;
+    }
   }
   &.cancel {
     background: rgb(188, 9, 9);
+  }
+}
+
+.icon-x-btn {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0px;
+  top: -5px;
+  background-color: transparent;
+  img {
+    width: 13px;
   }
 }
 

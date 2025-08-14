@@ -1,0 +1,14 @@
+@use '../abstracts/variables' as *;
+
+.status {
+  padding: 3px 12px;
+  font-weight: 400;
+  border-radius: 900px;
+  color: white;
+  &.active {
+    background: $color-active-cus;
+  }
+  &.nonactive {
+    background: $color-nonactive-cus;
+  }
+}

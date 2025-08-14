@@ -1,22 +1,40 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ref, watch } from 'vue'
 import type { User } from '../composables/types'
 
+// Props
+const props = defineProps<{
+  user: User | null
+}>()
+
+// Emit events ke parent
 const emit = defineEmits<{
   (e: 'close'): void
   (e: 'save', user: User): void
 }>()
 
-const form = reactive<User>({
+// Form — default value
+const form = ref<User>({
   id: 0,
   username: '',
   email: '',
   status: 'Active',
 })
 
-const saveUser = () => {
-  if (!form.username || !form.email) return
-  emit('save', { ...form })
+// Sync props.user ke form
+watch(
+  () => props.user,
+  (newVal) => {
+    if (newVal) {
+      form.value = { ...newVal }
+    }
+  },
+  { immediate: true },
+)
+
+// Simpan perubahan
+function save() {
+  emit('save', form.value)
 }
 </script>
 
@@ -24,17 +42,17 @@ const saveUser = () => {
   <div class="modal">
     <div class="modal-add">
       <div class="modal-header">
-        <h3 class="modal-add__title">Add User</h3>
+        <h3 class="modal-add__title">Edit User</h3>
         <button @click="$emit('close')" class="icon-x-btn">
           <img src="@/assets/images/icon/iconX.svg" alt="" />
         </button>
       </div>
 
       <label class="modal-add__label">Username :</label>
-      <input v-model="form.username" type="text" class="input-add" placeholder="user123" />
+      <input v-model="form.username" class="input-add" placeholder="Username" type="text" />
 
       <label class="modal-add__label">Email :</label>
-      <input v-model="form.email" type="email" class="input-add" placeholder="user@user.com" />
+      <input v-model="form.email" class="input-add" type="email" placeholder="Email" />
 
       <label class="modal-add__label">Status :</label>
       <select v-model="form.status" class="status-filter add">
@@ -44,7 +62,7 @@ const saveUser = () => {
 
       <div class="modal-add__actions">
         <button class="cancel" @click="$emit('close')">Cancel</button>
-        <button class="done" @click="saveUser">Done</button>
+        <button class="done" @click="save">Done</button>
       </div>
     </div>
   </div>

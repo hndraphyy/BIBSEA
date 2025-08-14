@@ -3,26 +3,36 @@
 .custom-table {
   width: 100%;
   border-radius: 8px;
-  overflow: hidden;
   background: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   position: relative;
   z-index: 10;
-  thead {
-    width: 10% !important;
+  overflow: visible !important;
 
-    th[data-v-32683533] {
-      background-color: $color-primary-superlight !important;
-      font-weight: 600;
-      padding: 0 !important;
-      width: 10px !important;
-      text-align: center;
-      .header {
-        margin-left: 0;
-        padding-bottom: 0;
+  thead {
+    &__header {
+      border-radius: 8px !important;
+    }
+    tr {
+      th[data-v-32683533] {
+        background-color: $color-primary-superlight !important;
+        font-weight: 600;
+        padding: 0 !important;
+        width: 10px !important;
         text-align: center;
-        padding-left: 15px;
-        padding-right: 15px;
+        // border-radius: 8px 8px 0 0 !important;
+
+        .header {
+          margin-left: 0;
+          padding-bottom: 0;
+          text-align: center;
+          padding-left: 15px;
+          padding-right: 15px;
+          &-action {
+            text-align: center;
+            width: 100%;
+          }
+        }
       }
     }
   }
@@ -37,5 +47,28 @@
         padding-right: 15px;
       }
     }
+  }
+  .vue3-easy-data-table__footer {
+    padding-right: 15px !important;
+  }
+  .pagination__rows-per-page {
+    position: absolute;
+    left: 15px;
+    z-index: 90;
+  }
+  .wp-action {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.vue3-easy-data-table {
+  &__main {
+    overflow: inherit !important ;
+  }
+  &__footer {
+    border-radius: 0 0 8px 8px !important;
   }
 }
