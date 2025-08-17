@@ -71,6 +71,11 @@ const {
           </div>
         </div>
       </template>
+
+      <!-- Kalau data kosong -->
+      <template #empty>
+        <div>Belum ada data report</div>
+      </template>
     </EasyDataTable>
 
     <!-- Modals -->

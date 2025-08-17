@@ -16,6 +16,10 @@ input {
   }
 }
 
+input[type='date'] {
+  border: 0.8px solid gray;
+}
+
 .search {
   position: relative;
   .icon-search {
