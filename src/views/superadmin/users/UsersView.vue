@@ -27,15 +27,24 @@ const {
     <!-- Filter -->
     <div class="filter">
       <div class="search">
-        <img src="@/assets/images/icon/search.svg" alt="" class="icon-search" />
-        <input v-model="searchQuery" class="search-filter" type="text" placeholder="Search ..." />
+        <img src="@/assets/images/icon/search.svg" alt="Search" class="icon-search" />
+        <input
+          v-model="searchQuery"
+          class="search-filter"
+          type="text"
+          placeholder="Search ..."
+        />
       </div>
+
       <select v-model="statusFilter" class="status-filter">
         <option value="">Status</option>
         <option value="Active">Active</option>
         <option value="Non Active">Non Active</option>
       </select>
-      <button class="user-dashboard__add-btn" @click="showAddUser = true">+ Add User</button>
+
+      <button class="user-dashboard__add-btn" @click="showAddUser = true">
+        + Add User
+      </button>
     </div>
 
     <!-- Table -->
@@ -63,18 +72,15 @@ const {
             <span>...</span>
           </button>
 
-          <div v-if="openMenuId === id">
-            <div class="wp-actions">
-              <button @click="editUser(id)" class="action-menu">Edit</button>
-              <button @click="deleteUser(id)" class="action-menu border">Hapus</button>
-            </div>
+          <div v-if="openMenuId === id" class="wp-actions">
+            <button @click="editUser(id)" class="action-menu">Edit</button>
+            <button @click="deleteUser(id)" class="action-menu border">Hapus</button>
           </div>
         </div>
       </template>
 
-      <!-- Kalau data kosong -->
       <template #empty>
-        <div>Belum ada data report</div>
+        <div>Belum ada data user</div>
       </template>
     </EasyDataTable>
 

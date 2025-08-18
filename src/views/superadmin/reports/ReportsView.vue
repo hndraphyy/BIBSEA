@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import EasyDataTable from "vue3-easy-data-table"
-import "vue3-easy-data-table/dist/style.css"
-import { useReportsTable } from "./composables/useReportsTable"
-import ReportDetailModal from "./modal/DetailModal.vue"
+import EasyDataTable from 'vue3-easy-data-table'
+import 'vue3-easy-data-table/dist/style.css'
+import { useReportsTable } from './composables/useReportsTable'
+import ReportDetailModal from './modal/DetailModal.vue'
 
 const {
   searchQuery,
   dateFilter,
   headers,
   filteredReports,
-  deleteReport,
-  detailReport,
+  Delete,
+  showReportDetail,
   openMenuId,
   toggleMenu,
   formatCurrency,
@@ -26,12 +26,7 @@ const {
     <div class="filter filter-two">
       <div class="search">
         <img src="@/assets/images/icon/search.svg" alt="" class="icon-search" />
-        <input
-          v-model="searchQuery"
-          class="search-filter"
-          type="text"
-          placeholder="Search ..."
-        />
+        <input v-model="searchQuery" class="search-filter" type="text" placeholder="Search ..." />
       </div>
       <input v-model="dateFilter" type="date" class="date-filter" />
     </div>
@@ -59,8 +54,8 @@ const {
         <div class="wp-action">
           <button @click.stop="toggleMenu(id)" class="action-btn"><span>...</span></button>
           <div v-if="openMenuId === id" class="wp-actions">
-            <button @click="detailReport(id)" class="action-menu">Detail</button>
-            <button @click="deleteReport(id)" class="action-menu border">Hapus</button>
+            <button @click="showReportDetail(id)" class="action-menu">Detail</button>
+            <button @click="Delete(id)" class="action-menu border">Hapus</button>
           </div>
         </div>
       </template>
@@ -72,10 +67,6 @@ const {
     </EasyDataTable>
 
     <!-- Modal Detail -->
-    <ReportDetailModal
-      :show="showDetailModal"
-      :report="selectedReport"
-      @close="closeDetailModal"
-    />
+    <ReportDetailModal :show="showDetailModal" :report="selectedReport" @close="closeDetailModal" />
   </div>
 </template>

@@ -5,9 +5,12 @@ export function useUsersTable() {
   const searchQuery = ref('')
   const statusFilter = ref('')
   const showAddUser = ref(false)
-  const showEditUser = ref(false) // untuk modal edit
+  const showEditUser = ref(false)
+  const openMenuId = ref<number | null>(null)
+  const selectedUser = ref<User | null>(null)
 
-  // Header untuk EasyDataTable
+  const users = ref<User[]>([])
+
   const headers = [
     { text: 'No', value: 'no' },
     { text: 'ID', value: 'id', sortable: true },
@@ -17,10 +20,7 @@ export function useUsersTable() {
     { text: 'Action', value: 'action' },
   ]
 
-  const users = ref<User[]>([])
-  const selectedUser = ref<User | null>(null) // data user yang sedang diedit
-
-  // Generate ID unik untuk user baru
+  // Generate unique ID untuk user
   const generateUniqueId = (): number => {
     let newId: number
     do {
@@ -29,88 +29,67 @@ export function useUsersTable() {
     return newId
   }
 
-  // Simpan data ke localStorage
-  const saveUsers = () => {
+  const saveUsers = (): void => {
     localStorage.setItem('users', JSON.stringify(users.value))
   }
 
-  // Dummy data awal
-  const loadDummyUsers = () => {
-    const dummyUserActive: Omit<User, 'id'> = {
-      username: 'smith anakecah ndiks',
-      email: 'jane@example.com',
-      status: 'Active',
-    }
-    const dummyUserNonActive: Omit<User, 'id'> = {
-      username: 'John Doe thethole',
-      email: 'john@example.com',
-      status: 'Non Active',
-    }
+  // Dummy user
+  const createDummyUser = (isActive: boolean): Omit<User, 'id'> => ({
+    username: isActive ? 'Jane Smith' : 'John Doe',
+    email: isActive ? 'jane@example.com' : 'john@example.com',
+    status: isActive ? 'Active' : 'Non Active',
+  })
 
+  const loadDummyUsers = (): void => {
     for (let i = 1; i <= 20; i++) {
-      const isEven = i % 2 === 0
       users.value.push({
         id: generateUniqueId(),
-        ...(isEven ? dummyUserNonActive : dummyUserActive),
+        ...createDummyUser(i % 2 !== 0),
       })
     }
     saveUsers()
   }
 
-  // Lifecycle — mount
+  // Lifecycle
   onMounted(() => {
     const savedUsers = localStorage.getItem('users')
     if (savedUsers) {
       users.value = JSON.parse(savedUsers)
-      // loadDummyUsers()
     } else {
       loadDummyUsers()
     }
+
     document.addEventListener('click', handleClickOutside)
   })
 
-  // Lifecycle — unmount
   onBeforeUnmount(() => {
     document.removeEventListener('click', handleClickOutside)
   })
 
-  // Filter users berdasarkan search & status
-  const filteredUsers = computed(() => {
-    return users.value
-      .map((user, index) => ({
-        no: index + 1,
-        ...user,
-      }))
+  // Filtering user
+  const filteredUsers = computed(() =>
+    users.value
+      .map((user, index) => ({ no: index + 1, ...user }))
       .filter((user) => {
-        const matchesStatus = statusFilter.value ? user.status === statusFilter.value : true
-
-        const matchesSearch = searchQuery.value
+        const matchStatus = statusFilter.value ? user.status === statusFilter.value : true
+        const matchSearch = searchQuery.value
           ? Object.values(user).some((value) =>
               String(value).toLowerCase().includes(searchQuery.value.toLowerCase()),
             )
           : true
+        return matchStatus && matchSearch
+      }),
+  )
 
-        return matchesStatus && matchesSearch
-      })
-  })
-
-  // Tambah user baru
-  const addUser = (newUser: User) => {
+  // CRUD
+  const addUser = (newUser: User): void => {
     newUser.id = generateUniqueId()
     users.value.push(newUser)
     saveUsers()
     showAddUser.value = false
   }
 
-  // Edit user — buka modal edit
-  function editUser(id: number) {
-    const found = users.value.find((u: User) => u.id === id) || null
-    selectedUser.value = found
-    showEditUser.value = true
-  }
-
-  // Update user
-  const updateUser = (updatedUser: User) => {
+  const updateUser = (updatedUser: User): void => {
     const index = users.value.findIndex((u) => u.id === updatedUser.id)
     if (index !== -1) {
       users.value[index] = { ...updatedUser }
@@ -119,26 +98,29 @@ export function useUsersTable() {
     showEditUser.value = false
   }
 
-  // Hapus user
-  const deleteUser = (id: number) => {
+  const editUser = (id: number): void => {
+    selectedUser.value = users.value.find((u) => u.id === id) || null
+    showEditUser.value = true
+    openMenuId.value = null
+  }
+
+  const deleteUser = (id: number): void => {
     users.value = users.value.filter((u) => u.id !== id)
     saveUsers()
     openMenuId.value = null
   }
 
-  const openMenuId = ref<number | null>(null)
-
-  // Toggle menu action
-  const toggleMenu = (id: number) => {
+  // Menu toggle
+  const toggleMenu = (id: number): void => {
     openMenuId.value = openMenuId.value === id ? null : id
   }
 
-  // Tutup menu kalau klik di luar
-  const handleClickOutside = (e: MouseEvent) => {
+  const handleClickOutside = (e: MouseEvent): void => {
     const target = e.target as HTMLElement
-    if (!target.closest('.action-menu') && !target.closest('.action-btn')) {
-      openMenuId.value = null
-    }
+    if (target.closest('.wp-actions')) return
+    if (target.closest('.action-btn')) return
+
+    openMenuId.value = null
   }
 
   return {
